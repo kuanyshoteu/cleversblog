@@ -1,24 +1,23 @@
 
-console.log('555')
+
 function register(){
 	username = document.getElementById('username').value
 	mail = document.getElementById('emailAddress').value
 	password1 = document.getElementById('password').value
 	password2 = document.getElementById('passwordConfirmation').value
-	// Что здесь происходит?
-	csrf = document.getElementsByName("csrfmiddlewaretoken")[0].getAttribute("value")
-	// Что здесь происходит?
-	
-	data = new FormData()
-	// Что здесь происходит?
-	data.append('username', username)
-	// Что здесь происходит?
-	data.append('csrfmiddlewaretoken', csrf)
-	// Что здесь происходит?
-	fetch('/api/sign_in/', {
-		method: 'POST',
-		body: data
-	  })	
+	if(password1 == password2){
+		csrf = document.getElementsByName("csrfmiddlewaretoken")[0].getAttribute("value")
+		data = new FormData() // JSON
+		data.append('csrfmiddlewaretoken', csrf)
+		data.append('username', username)
+		data.append('mail', mail)
+		data.append('password1', password1)
+		data.append('password2', password2)
+		fetch('/api/sign_in/', {
+			method: 'POST',
+			body: data
+		})	
+	}
 }
 	
 	

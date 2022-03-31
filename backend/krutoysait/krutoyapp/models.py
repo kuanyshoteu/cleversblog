@@ -7,7 +7,8 @@ class Profile(models.Model):
     age = models.IntegerField()
     is_krutoi = models.BooleanField()
 
-
-
-
-
+class Post(models.Model):
+    text = models.TextField()
+    likes_number = models.IntegerField()
+    is_premium = models.BooleanField()
+    

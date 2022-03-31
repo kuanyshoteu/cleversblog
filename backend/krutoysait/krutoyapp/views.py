@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from .models import *
 
 # Что здесь происходит?
 def main(request):
@@ -16,6 +16,25 @@ def rabotay(request):
 
 # Что здесь происходит?
 def privet(request):
-    # Что здесь происходит?
-    print(request.POST.get('username'))
-    return JsonResponse({})
+    username = request.POST.get('username')
+    mail = request.POST.get('mail')
+    password1 = request.POST.get('password1')
+    password2 = request.POST.get('password2')
+    post = Post.objects.create(
+        text = "text 1",
+        likes_number = 5,
+        is_premium = False,
+    )
+    print(post)
+    data = {
+        'a':5,
+        'b':6,
+        'c': False,
+        'd': [1, 3, 'w'],
+    }
+    return JsonResponse(data)
+
+
+
+def poka():
+    a = 5
