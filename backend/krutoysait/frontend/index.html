@@ -73,8 +73,10 @@
                 <div style="z-index: 100;" id="gora1" class="bg-white w-2/6 h-96"></div>
                 <div style="z-index: 0;" id="iama" class=" p-16 w-2/6"></div>
                 <div style="z-index: 100;" id="gora3" class="bg-white p-16 w-2/6"></div>
-
             </section>
+            <div class="flex centered">
+                <a onclick="like()" class="likeButton px-4 py-2 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">like</a>
+            </div>
             <section class="w-full max-w-2xl px-6 py-4 mx-auto bg-white rounded-md  dark:bg-gray-800">
                 <p class="postText mt-3 text-center text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 <div class="mt-6 ">
@@ -90,7 +92,6 @@
                 <div class="hidden">
                     <div id="origComment" class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                         <div class="w-2 bg-gray-800 dark:bg-gray-900"></div>
-                
                         <div class="flex items-center px-2 py-3">
                             <img class="object-cover w-10 h-10 rounded-full" alt="User avatar" src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200">
                             
@@ -105,6 +106,8 @@
             </section>
         </div>
     </div>
+    {% csrf_token %}
+
     <script src='{% static "js/script.js" %}'></script>
 </body>
 </html>

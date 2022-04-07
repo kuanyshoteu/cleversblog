@@ -43,7 +43,7 @@ function a(){
 
 
 postnum = 0
-function createPost(){
+async function createPost(){
 	origPost = document.getElementById("origPost")
 	clonePost = origPost.cloneNode(true)
 	clonePost.setAttribute('id', 'post' + postnum)
@@ -57,6 +57,8 @@ function createPost(){
 	img2 = clonePost.getElementsByClassName('kvadrat2')[0]
 	img1.setAttribute("id", "img_" + postnum)
 	img2.setAttribute("id", "img2_" + postnum)
+	likeButton = clonePost.getElementsByClassName('likeButton')[0]
+	likeButton.setAttribute("onclick", 'like('+ postnum + ')')
 	var lft = screen.width/3 //За левую координату
 	img1.style.left = 0 + "px";
 	img2.style.left = lft + "px";
@@ -64,24 +66,43 @@ function createPost(){
 	rghtButton = clonePost.getElementsByClassName("btn-right")[0]
 	rghtButton.setAttribute("onclick", "moveCaruselRight(" + postnum + ")")
 	
-	// Что здесь происходит?
 	commentBox = clonePost.getElementsByClassName('commentBox')[0]
-	// Что здесь происходит?
 	commentBox.setAttribute("id", "commentBox" + postnum)
-
-	// Что здесь Происходит?
 	commentTextarea = clonePost.getElementsByClassName('commentTextarea')[0]
-	// Что здесь Происходит?
 	commentTextarea.setAttribute("id", "commentTextarea" + postnum)
-
 	commentButton = clonePost.getElementsByClassName('commentButton')[0]
-	// Что здесь Происходит?
 	commentButton.setAttribute("onclick", "comment(" + postnum + ")")
-	// Что здесь Происходит?
 	postnum += 1
-	// Пихаем в общий бокс
 	postBox = document.getElementById("postBox")
 	postBox.prepend(clonePost)
+
+	csrf = document.getElementsByName("csrfmiddlewaretoken")[0].getAttribute("value")
+	data = new FormData() // JSON
+	
+	data.append('csrfmiddlewaretoken', csrf)
+	data.append('text', newtext)
+	a = await fetch('/api/create_post/', {
+		method: 'POST',
+		body: data
+	})	
+	data = await a.json()
+	ok = data.ok
+	if(ok == true){
+		alert("Kruto")
+	}
+	console.log(ok)
+}
+async function like(postnum){
+	csrf = document.getElementsByName("csrfmiddlewaretoken")[0].getAttribute("value")
+	data = new FormData() // JSON
+	
+	data.append('csrfmiddlewaretoken', csrf)
+	data.append('id', postnum + 1)
+	a = await fetch('/api/like/', {
+		method: 'POST',
+		body: data
+	})	
+	data = await a.json()
 }
 function comment(id){
     orig = document.getElementById("origComment")

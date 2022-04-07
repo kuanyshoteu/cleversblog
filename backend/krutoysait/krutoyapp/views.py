@@ -20,12 +20,7 @@ def privet(request):
     mail = request.POST.get('mail')
     password1 = request.POST.get('password1')
     password2 = request.POST.get('password2')
-    post = Post.objects.create(
-        text = "text 1",
-        likes_number = 5,
-        is_premium = False,
-    )
-    print(post)
+   
     data = {
         'a':5,
         'b':6,
@@ -34,6 +29,32 @@ def privet(request):
     }
     return JsonResponse(data)
 
+def like(request):
+    postid = int(request.POST.get('id'))
+    post = Post.objects.get(id = 3)
+    post.likes_number += 1
+    post.save()
+    print(post.likes_number)
+    data = {
+        'likes_number':post.likes_number
+    }
+    return JsonResponse(data)
+
+def create_post(request):
+    text = request.POST.get('text')
+    ok = False
+    if len(text) < 5:
+        ok = True
+    post = Post.objects.create(
+        text = text,
+        likes_number = 5,
+        is_premium = False,
+    )
+    print(post)
+    data = {
+        'ok':ok
+    }
+    return JsonResponse(data)
 
 
 def poka():
