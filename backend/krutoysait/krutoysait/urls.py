@@ -13,6 +13,6 @@ urlpatterns = [
     path(r'api/sign_in/', privet),
     path(r'api/create_post/', create_post),
     path(r'api/like/', like),
-
+    path("__reload__/", include("django_browser_reload.urls")),
 #    http://127.0.0.1:8000/home/
 ]
