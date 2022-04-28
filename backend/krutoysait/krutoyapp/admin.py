@@ -9,3 +9,12 @@ class PostModelAdmin(admin.ModelAdmin):
         model = Post
 
 admin.site.register(Post, PostModelAdmin)
+
+
+class ProfileModelAdmin(admin.ModelAdmin):
+    list_display = ["id", "name", "age"]
+    list_display_links = ["id", "name"]
+    class Meta:
+        model = Profile
+
+admin.site.register(Profile, ProfileModelAdmin)

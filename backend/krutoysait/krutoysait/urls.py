@@ -10,7 +10,7 @@ urlpatterns = [
     # вызывает эту функия
     path(r'', main),
     path(r'sign_in/', sign_in),
-    path(r'api/sign_in/', privet),
+    path(r'api/sign_in/', create_user),
     path(r'api/create_post/', create_post),
     path(r'api/like/', like),
     path("__reload__/", include("django_browser_reload.urls")),

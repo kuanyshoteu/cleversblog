@@ -7,7 +7,7 @@ function register(){
 	mail = document.getElementById('emailAddress').value
 	password1 = document.getElementById('password').value
 	password2 = document.getElementById('passwordConfirmation').value
-	if(password1 == password2){
+	if(password1 == password2 && password1.length > 4){
 		csrf = document.getElementsByName("csrfmiddlewaretoken")[0].getAttribute("value")
 		data = new FormData() // JSON
 		data.append('csrfmiddlewaretoken', csrf)

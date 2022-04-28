@@ -1,3 +1,4 @@
+import profile
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
@@ -15,17 +16,23 @@ def rabotay(request):
     return render(request, "profile/profile.html", {})
 
 # Что здесь происходит?
-def privet(request):
+def create_user(request):
     username = request.POST.get('username')
     mail = request.POST.get('mail')
     password1 = request.POST.get('password1')
-    password2 = request.POST.get('password2')
+
+    user = User.objects.create(username=username, password=password1)
+    if password1:
+        user.set_password(password1)
+    user.save()
+    profile = Profile.objects.create(
+        user = user,
+        name = username,
+        age = 2,
+        is_krutoi = True,
+    )
    
     data = {
-        'a':5,
-        'b':6,
-        'c': False,
-        'd': [1, 3, 'w'],
     }
     return JsonResponse(data)
 
